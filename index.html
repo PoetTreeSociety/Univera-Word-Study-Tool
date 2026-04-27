@@ -477,7 +477,7 @@
                     });
                 } catch (e) {
                     // If the current environment rejects the model name, gracefully fall back to the next one
-                    if (e.message && (e.message.includes("not found") || e.message.includes("not supported"))) {
+                    if (e.message && (e.message.includes("not found") || e.message.includes("not supported") || e.message.includes("referer"))) {
                         console.warn(`Model ${model} unavailable in this environment, falling back...`);
                         lastError = e;
                         continue;
