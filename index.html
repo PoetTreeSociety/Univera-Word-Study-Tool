@@ -402,7 +402,9 @@
     </div>
 
     <script>
-        const apiKey = "";
+        // Auto-detect environment to bypass Canvas referer blocks while using your real key on GitHub
+        const isPreviewEnv = window.location.hostname.includes('usercontent.goog');
+        const apiKey = isPreviewEnv ? "" : "AIzaSyB9JjY4HLZ6bJ7g15X8LdJHjAmEb0hoXuE";
 
         function triggerHaptic(type = 'light') {
             if (!window.navigator.vibrate) return;
