@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Univera | One God. One Voice. One Word.</title>
     
-    <!-- PWA / App Icon Configuration for iOS & Android -->
+    <!-- PWA / App Icon Configuration -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Univera">
@@ -15,7 +15,6 @@
     <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1">
     <link rel="apple-touch-icon" href="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1">
     
-    <!-- Inline Web Manifest for Android 'Add to Home Screen' support -->
     <link rel="manifest" href='data:application/manifest+json,{"name":"Univera","short_name":"Univera","start_url":".","display":"standalone","background_color":"#f8fafc","theme_color":"#3b82f6","icons":[{"src":"https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1","sizes":"512x512","type":"image/png"}]}'>
 
     <!-- Google Fonts -->
@@ -29,31 +28,16 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        slate: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            800: '#1e293b',
-                            900: '#0f172a',
-                        },
-                        // Reverted to original blue/violet/amber palette
+                        slate: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a' },
                         primary: '#3b82f6',
-                        accent: {
-                            hebrew: '#f59e0b', // Amber
-                            greek: '#06b6d4',  // Cyan
-                            ai: '#8b5cf6',     // Violet
-                            danger: '#ef4444'  // Rose
-                        }
+                        accent: { hebrew: '#f59e0b', greek: '#06b6d4', ai: '#8b5cf6', danger: '#ef4444' }
                     },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
                     boxShadow: {
                         'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.03)',
                         'float': '0 20px 40px -10px rgba(0,0,0,0.05)',
@@ -62,8 +46,6 @@
                     },
                     animation: {
                         'blob': 'blob 10s infinite',
-                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'ticker': 'ticker 120s linear infinite',
                         'border-flow': 'borderFlow 4s linear infinite',
                     },
@@ -74,19 +56,8 @@
                             '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
                             '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         },
-                        fadeInUp: {
-                            '0%': { opacity: 0, transform: 'translateY(20px)' },
-                            '100%': { opacity: 1, transform: 'translateY(0)' },
-                        },
-                        ticker: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' }
-                        },
-                        borderFlow: {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' },
-                            '100%': { backgroundPosition: '0% 50%' }
-                        }
+                        ticker: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+                        borderFlow: { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } }
                     }
                 }
             }
@@ -94,7 +65,6 @@
     </script>
 
     <style>
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; border: 2px solid #f8fafc; }
@@ -103,161 +73,96 @@
         .text-hebrew { font-family: 'Times New Roman', Times, serif; font-size: 1.8em; direction: rtl; }
         .text-greek { font-family: 'Times New Roman', Times, serif; font-size: 1.6em; }
         
-        /* 3D Tilt Card Base */
-        .tilt-card { transform-style: preserve-3d; transform: perspective(1000px); }
-        .tilt-content { transform: translateZ(30px); }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.9); }
+        .gradient-border-wrapper { background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6); background-size: 300% 300%; animation: borderFlow 8s ease infinite; padding: 2px; border-radius: 9999px; }
         
-        /* Glass Panel Reusable Class */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
-        }
-
-        /* Animated Gradient Border for Search Bar */
-        .gradient-border-wrapper {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
-            background-size: 300% 300%;
-            animation: borderFlow 8s ease infinite;
-            padding: 2px;
-            border-radius: 9999px;
-        }
-
-        /* Generated HTML Content Styling */
-        .gen-content h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
-        .gen-content h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: #334155; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+        .gen-content h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem; margin-bottom: 0.75rem; }
         .gen-content p { margin-bottom: 1rem; line-height: 1.7; color: #475569; }
-        .gen-content ul { list-style-type: none; padding-left: 0; margin-bottom: 1rem; }
-        .gen-content li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: #475569; line-height: 1.6; }
-        .gen-content li::before { content: '•'; color: #8b5cf6; position: absolute; left: 0; font-weight: bold; font-size: 1.2em; line-height: 1; }
-        .gen-content strong { color: #0f172a; font-weight: 700; }
-        .gen-content em { color: #3b82f6; font-style: normal; font-weight: 500; background: rgba(59,130,246,0.1); padding: 0.1em 0.3em; border-radius: 0.25em; }
-
+        .gen-content li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: #475569; }
+        .gen-content li::before { content: '•'; color: #8b5cf6; position: absolute; left: 0; font-weight: bold; }
         .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-
-        /* Orientation-specific adjustments */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .md\:hidden.fixed.bottom-0 { height: 50px; }
-            .md\:hidden.fixed.bottom-0 i { font-size: 1.2rem; margin-bottom: 0; }
-            .md\:hidden.fixed.bottom-0 span { display: none; }
-            nav.sticky { position: relative; }
-        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary selection:text-white pb-16 md:pb-0">
 
-    <!-- Subtle Premium Noise Texture Overlay -->
-    <div class="fixed inset-0 z-[-1] opacity-[0.4] pointer-events-none mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
-
-    <!-- Ambient Background Gradients -->
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 z-[-1] opacity-[0.4] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
     <div class="fixed inset-0 z-[-2] overflow-hidden pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400/20 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-blob"></div>
-        <div class="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-purple-400/20 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-blob" style="animation-delay: 2s;"></div>
-        <div class="absolute bottom-[-20%] left-[20%] w-[40%] h-[40%] bg-amber-200/20 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-blob" style="animation-delay: 4s;"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400/20 rounded-full blur-[100px] animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-purple-400/20 rounded-full blur-[100px] animate-blob" style="animation-delay: 2s;"></div>
     </div>
 
-    <!-- GENERATIVE MODAL -->
+    <!-- Modals -->
     <div id="gen-modal" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 opacity-0 transition-all duration-500">
         <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md" onclick="closeGenModal()"></div>
         <div class="glass-panel rounded-[2rem] max-w-3xl w-full max-h-[85vh] flex flex-col transform scale-95 transition-transform duration-500 relative overflow-hidden shadow-2xl border border-white" id="gen-modal-panel">
             <div class="px-8 py-6 border-b border-white/50 flex justify-between items-center bg-white/40">
                 <div class="flex items-center gap-4">
-                    <img src="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1" alt="Univera Logo" class="h-10 w-10 object-contain rounded-lg shadow-sm bg-white p-1">
-                    <h2 id="gen-modal-title" class="text-2xl font-serif font-bold text-slate-900 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-primary">Univera Insights</h2>
+                    <img src="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1" alt="Univera Logo" class="h-10 w-10 object-contain rounded-lg bg-white p-1">
+                    <h2 class="text-2xl font-serif font-bold text-slate-900">Univera Insights</h2>
                 </div>
-                <button onclick="closeGenModal()" class="h-10 w-10 rounded-full bg-white/80 hover:bg-white text-slate-400 hover:text-accent-danger transition-all flex items-center justify-center shadow-sm">
+                <button onclick="closeGenModal()" class="h-10 w-10 rounded-full bg-white/80 hover:bg-white text-slate-400 flex items-center justify-center shadow-sm">
                     <i class="ph ph-x text-xl"></i>
                 </button>
             </div>
-            <div id="gen-modal-content" class="p-8 md:p-10 overflow-y-auto gen-content bg-white/50"></div>
+            <div id="gen-modal-content" class="p-8 md:p-10 overflow-y-auto gen-content bg-white/50 leading-relaxed text-slate-700"></div>
             <div class="px-8 py-5 border-t border-white/50 bg-white/80 flex justify-end gap-3 backdrop-blur-md">
-                <button onclick="copyGenContent()" class="px-6 py-2.5 text-sm font-semibold text-slate-700 bg-white rounded-xl hover:shadow-md transition-all flex items-center gap-2 shadow-sm border border-slate-100">
+                <button onclick="copyGenContent()" class="px-6 py-2.5 text-sm font-semibold text-slate-700 bg-white rounded-xl hover:shadow-md transition-all flex items-center gap-2 border border-slate-100 shadow-sm">
                     <i class="ph-fill ph-copy text-lg text-slate-400"></i> Copy to Clipboard
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- SIDEBAR PANEL (History & Bookmarks) -->
+    <!-- Sidebar Panel -->
     <div id="sidebar-panel" class="fixed inset-0 z-[130] hidden">
         <div class="absolute inset-0 bg-slate-900/20 backdrop-blur-sm opacity-0 transition-opacity duration-300" id="sidebar-backdrop" onclick="closeSidebar()"></div>
         <div class="absolute right-0 top-0 bottom-0 w-full max-w-sm glass-panel shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col border-l border-white/50" id="sidebar-content">
             <div class="px-6 py-5 border-b border-white/50 flex justify-between items-center bg-white/50">
                 <h2 id="sidebar-title" class="text-xl font-serif font-bold text-slate-900 tracking-tight">Bookmarks</h2>
-                <button onclick="closeSidebar()" class="h-8 w-8 rounded-full bg-white hover:bg-slate-50 text-slate-500 hover:text-accent-danger transition-all flex items-center justify-center shadow-sm">
-                    <i class="ph ph-x text-lg"></i>
-                </button>
+                <button onclick="closeSidebar()" class="h-8 w-8 rounded-full bg-white text-slate-500 flex items-center justify-center shadow-sm"><i class="ph ph-x text-lg"></i></button>
             </div>
             <div id="sidebar-list" class="flex-grow overflow-y-auto p-6 space-y-3 bg-white/30"></div>
         </div>
     </div>
 
-    <!-- MOBILE SEARCH MODAL -->
-    <div id="mobile-search-modal" class="fixed inset-0 z-[140] hidden flex-col bg-slate-50/95 backdrop-blur-2xl transition-all duration-300 opacity-0 translate-y-8">
-        <div class="p-4 pt-6 flex gap-3 items-center border-b border-slate-200 bg-white/80 shadow-sm pb-safe">
-            <form id="mobile-search-form" class="flex-1 relative">
-                <i class="ph-bold ph-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                <input type="text" id="mobile-search-input" class="w-full bg-slate-100 border-none rounded-full py-3.5 pl-11 pr-4 outline-none focus:ring-2 focus:ring-primary/20 text-slate-800 font-semibold text-base" placeholder="Search a concept..." autocomplete="off">
-            </form>
-            <button onclick="closeMobileSearch()" class="text-slate-600 font-bold text-sm px-2">Cancel</button>
-        </div>
-        <div class="flex-1 overflow-y-auto p-6">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Suggested Concepts</p>
-            <div class="flex flex-wrap gap-2">
-                <span onclick="runSearch('Parakletos')" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-600 shadow-sm">Parakletos</span>
-                <span onclick="runSearch('Covenant')" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-600 shadow-sm">Covenant</span>
-                <span onclick="runSearch('Kenosis')" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-600 shadow-sm">Kenosis</span>
-                <span onclick="runSearch('Ruach')" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-600 shadow-sm">Ruach</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- LOADING OVERLAY -->
+    <!-- Overlays -->
     <div id="loading-overlay" class="hidden fixed inset-0 bg-slate-50/80 backdrop-blur-xl z-[100] flex flex-col items-center justify-center text-center">
-        <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-primary to-accent-ai blur-xl opacity-40 rounded-full animate-pulse-slow"></div>
-            <div class="h-24 w-24 bg-white rounded-3xl shadow-float flex items-center justify-center relative z-10 border border-slate-100 transform p-3">
-                 <img src="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1" alt="Loading" class="h-full w-full object-contain animate-pulse">
-            </div>
+        <div class="h-24 w-24 bg-white rounded-3xl shadow-float flex items-center justify-center border border-slate-100 p-3">
+             <img src="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1" alt="Loading" class="h-full w-full object-contain animate-pulse">
         </div>
-        <p id="loading-text-dynamic" class="text-slate-900 font-serif text-3xl font-bold mt-10 mb-2 tracking-tight transition-opacity duration-300">Synthesizing...</p>
-        <p class="text-slate-500 font-medium">Cross-referencing lexicons and ancient texts.</p>
+        <p class="text-slate-900 font-serif text-3xl font-bold mt-10 tracking-tight">Synthesizing...</p>
     </div>
 
-    <!-- ERROR TOAST -->
+    <!-- Error Toast -->
     <div id="error-toast" class="hidden fixed bottom-8 right-8 bg-white border border-slate-100 px-6 py-4 rounded-2xl shadow-float-lg z-[110] flex items-center gap-4 transition-all duration-300 transform translate-y-10 opacity-0 overflow-hidden">
-        <div id="toast-accent-bar" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-danger"></div>
+        <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-danger"></div>
         <div class="h-10 w-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-            <i class="ph-fill ph-warning-circle text-2xl text-accent-danger" id="toast-icon"></i>
+            <i class="ph-fill ph-warning-circle text-2xl text-accent-danger"></i>
         </div>
-        <span id="error-toast-msg" class="font-semibold text-slate-800 text-sm">Error occurred.</span>
+        <div class="flex flex-col">
+            <span id="error-toast-msg" class="font-bold text-slate-900 text-sm">Error occurred.</span>
+            <span id="error-toast-tip" class="text-slate-500 text-xs">Try checking your API Key settings.</span>
+        </div>
     </div>
 
-    <!-- STATE 1: LANDING -->
-    <div id="landing-state" class="flex-grow flex flex-col items-center justify-center p-6 transition-all duration-700 relative z-10">
+    <!-- Landing State -->
+    <div id="landing-state" class="flex-grow flex flex-col items-center justify-center p-6 relative z-10">
         <div class="max-w-3xl w-full text-center space-y-12">
             <div class="space-y-6">
-                <div class="inline-flex items-center justify-center p-2 bg-white/80 backdrop-blur-md shadow-sm rounded-3xl border border-white mb-2 transform hover:scale-105 transition-transform duration-500">
-                    <img src="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1" alt="Univera Logo" class="h-16 w-16 md:h-20 md:w-20 object-contain rounded-2xl shadow-sm">
-                </div>
-                <h1 class="text-6xl md:text-8xl font-serif font-bold text-slate-900 tracking-tighter leading-tight">
+                <img src="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1" alt="Univera Logo" class="h-20 w-20 mx-auto rounded-2xl shadow-sm">
+                <h1 class="text-6xl md:text-8xl font-serif font-bold text-slate-900 tracking-tighter">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent-ai to-primary bg-[length:200%_auto] animate-border-flow">Univera.</span>
                 </h1>
-                <p class="text-2xl text-slate-600 font-serif italic max-w-xl mx-auto drop-shadow-sm">
-                    One God. One Voice. One Word.
-                </p>
+                <p class="text-2xl text-slate-600 font-serif italic max-w-xl mx-auto">One God. One Voice. One Word.</p>
             </div>
 
             <form id="main-search-form" class="relative max-w-2xl mx-auto group">
                 <div class="gradient-border-wrapper shadow-glow-ai group-hover:shadow-float-lg transition-all">
                     <div class="relative flex items-center bg-white/95 backdrop-blur-2xl rounded-full p-2 h-full">
-                        <div class="pl-4 sm:pl-6 text-primary">
-                            <i class="ph-bold ph-magnifying-glass text-xl sm:text-2xl"></i>
-                        </div>
-                        <input type="text" id="main-search-input" class="w-full bg-transparent border-none text-lg sm:text-xl text-slate-800 placeholder-slate-400 focus:ring-0 outline-none py-3 sm:py-4 font-semibold" placeholder="Explore a concept..." required>
-                        <button type="submit" class="px-4 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold shadow-md flex items-center justify-center">
+                        <div class="pl-4 sm:pl-6 text-primary"><i class="ph-bold ph-magnifying-glass text-xl sm:text-2xl"></i></div>
+                        <input type="text" id="main-search-input" class="w-full bg-transparent border-none text-lg sm:text-xl text-slate-800 placeholder-slate-400 focus:ring-0 py-3 sm:py-4 font-semibold px-6" placeholder="Explore a concept..." required>
+                        <button type="submit" class="px-4 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold shadow-md">
                             <span class="hidden sm:inline">Exegesis</span>
                             <i class="ph-bold ph-arrow-right sm:hidden text-xl"></i>
                         </button>
@@ -265,48 +170,40 @@
                 </div>
             </form>
             
-            <div class="relative w-full max-w-2xl mx-auto overflow-hidden mt-8">
-                <div id="word-ticker" class="flex items-center min-w-max whitespace-nowrap animate-ticker py-2"></div>
-            </div>
+            <div id="word-ticker" class="flex items-center min-w-max whitespace-nowrap animate-ticker py-2"></div>
         </div>
     </div>
 
-    <!-- STATE 2: DASHBOARD -->
+    <!-- Results Dashboard -->
     <div id="results-state" class="hidden flex-col w-full min-h-screen relative z-10">
-        <nav class="sticky top-0 z-50 glass-panel px-6 py-4">
-            <div class="max-w-7xl mx-auto flex items-center justify-between">
-                <div class="flex items-center gap-4 cursor-pointer" onclick="resetToHome()">
-                    <div class="p-1 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center">
-                        <img src="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1" alt="Univera Logo" class="h-8 w-8 object-contain rounded-lg">
-                    </div>
-                    <span class="font-serif font-bold text-2xl text-slate-900 hidden sm:block tracking-tight">Univera</span>
-                </div>
-                
-                <form id="nav-search-form" class="relative max-w-lg w-full mx-8 hidden md:block">
-                    <i class="ph-bold ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                    <input type="text" id="nav-search-input" class="w-full bg-white/60 border border-slate-200 rounded-full py-3 pl-12 pr-4 outline-none focus:ring-4 focus:ring-primary/10 text-sm font-semibold" placeholder="Search another concept...">
-                </form>
+        <nav class="sticky top-0 z-50 glass-panel px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4 cursor-pointer" onclick="resetToHome()">
+                <img src="https://www.dropbox.com/scl/fi/57w6vnuxqpzsbvgif658x/b6e17583-fc30-4d2c-abd8-80e6229b0b14.png?rlkey=kvsvj9mrn4zelw7gs5vfg6iv1&st=khp8hdde&raw=1" alt="Univera Logo" class="h-8 w-8">
+                <span class="font-serif font-bold text-2xl text-slate-900 hidden sm:block tracking-tight">Univera</span>
+            </div>
+            
+            <form id="nav-search-form" class="relative max-w-lg w-full mx-8 hidden md:block">
+                <i class="ph-bold ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="nav-search-input" class="w-full bg-white/60 border border-slate-200 rounded-full py-3 pl-12 pr-4 outline-none focus:ring-4 focus:ring-primary/10 text-sm font-semibold" placeholder="Search another concept...">
+            </form>
 
-                <div class="flex items-center gap-3">
-                    <button onclick="exportToNotes()" class="hidden md:flex h-11 px-5 rounded-full bg-white border border-slate-200 items-center gap-2 font-bold text-sm transition-all hover:bg-slate-50">
-                        <i class="ph-bold ph-download-simple"></i> Export
-                    </button>
-                    <button onclick="openSidebar('bookmarks')" class="h-11 w-11 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50"><i class="ph-fill ph-bookmarks"></i></button>
-                    <button onclick="openSidebar('history')" class="h-11 w-11 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50"><i class="ph-bold ph-clock-counter-clockwise"></i></button>
-                </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openSidebar('bookmarks')" class="h-11 w-11 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50"><i class="ph-fill ph-bookmarks"></i></button>
+                <button onclick="openSidebar('history')" class="h-11 w-11 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50"><i class="ph-bold ph-clock-counter-clockwise"></i></button>
             </div>
         </nav>
 
         <main class="flex-grow p-4 md:p-8 max-w-7xl mx-auto w-full space-y-8 mt-4 pb-16">
-            <section class="glass-panel rounded-[2.5rem] p-8 md:p-14 shadow-float border border-white relative overflow-hidden tilt-card">
-                <div class="tilt-content relative z-10 flex flex-col md:flex-row justify-between items-start gap-8">
+            <!-- Word Header -->
+            <section class="glass-panel rounded-[2.5rem] p-8 md:p-14 shadow-float border border-white relative overflow-hidden">
+                <div class="relative z-10 flex flex-col md:flex-row justify-between items-start gap-8">
                     <div class="flex-1">
                         <div class="flex items-center gap-4 mb-6">
                             <h2 id="english-word" class="text-6xl md:text-7xl font-serif font-bold text-slate-900 tracking-tighter capitalize">Word</h2>
                             <span id="pos-label" class="px-5 py-2 bg-slate-900 text-white text-xs font-bold rounded-full uppercase tracking-widest">POS</span>
-                            <button id="bookmark-btn" onclick="toggleBookmark()" class="h-11 w-11 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:border-primary transition-all"><i id="bookmark-icon" class="ph-bold ph-bookmark-simple"></i></button>
+                            <button onclick="toggleBookmark()" class="h-11 w-11 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:border-primary transition-all shadow-sm"><i id="bookmark-icon" class="ph-bold ph-bookmark-simple"></i></button>
                         </div>
-                        <p class="text-slate-600 font-medium text-xl max-w-3xl leading-relaxed" id="synthesized-def">Def.</p>
+                        <p class="text-slate-600 font-medium text-xl max-w-3xl leading-relaxed" id="synthesized-def">Definition...</p>
                         <div id="word-cloud-container" class="mt-8 flex flex-wrap gap-3 hidden"></div>
                     </div>
                     <div class="bg-slate-100/80 rounded-2xl p-1.5 flex border border-slate-200/50">
@@ -315,136 +212,64 @@
                     </div>
                 </div>
                 <div class="w-full h-px bg-slate-200 my-10"></div>
-                <div id="lexical-data-nt" class="tilt-content grid grid-cols-1 md:grid-cols-12 gap-10"></div>
-                <div id="lexical-data-ot" class="tilt-content grid grid-cols-1 md:grid-cols-12 gap-10 hidden"></div>
+                <!-- Lexical Data -->
+                <div id="lexical-data-nt" class="grid grid-cols-1 md:grid-cols-12 gap-10"></div>
+                <div id="lexical-data-ot" class="grid grid-cols-1 md:grid-cols-12 gap-10 hidden"></div>
             </section>
 
+            <!-- Bottom Content Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div class="lg:col-span-8 space-y-8">
                     <section class="glass-panel rounded-[2.5rem] p-8 md:p-10 border border-white">
-                        <h3 class="flex items-center gap-4 text-2xl font-serif font-bold text-slate-900 mb-8">
-                            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center shadow-md">
-                                <i class="ph-fill ph-books text-white text-xl"></i>
-                            </div>
-                            Contextual Usage
-                        </h3>
+                        <h3 class="flex items-center gap-4 text-2xl font-serif font-bold text-slate-900 mb-8"><i class="ph-fill ph-books text-primary"></i> Contextual Usage</h3>
                         <div id="usage-container-nt" class="grid grid-cols-1 gap-6"></div>
                         <div id="usage-container-ot" class="grid grid-cols-1 gap-6 hidden"></div>
                     </section>
-                    <section class="glass-panel rounded-[2.5rem] p-8 md:p-10 border border-white">
-                        <h3 class="flex items-center gap-4 text-2xl font-serif font-bold text-slate-900 mb-8">
-                            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-accent-greek to-cyan-600 flex items-center justify-center shadow-md">
-                                <i class="ph-fill ph-translate text-white text-xl"></i>
-                            </div>
-                            Translation Matrix
-                        </h3>
-                        <table class="w-full text-left border-separate border-spacing-y-3">
-                            <tbody id="translation-matrix-body"></tbody>
-                        </table>
-                        <div id="translation-notes-container" class="mt-8 p-8 bg-white/60 rounded-3xl border border-white relative hidden">
-                            <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-greek"></div>
-                            <h4 class="text-xs font-bold uppercase text-accent-greek mb-3">Translators' Notes</h4>
-                            <p class="text-base text-slate-700 font-medium" id="translation-notes"></p>
-                        </div>
-                    </section>
                 </div>
+                <!-- Scholar Sidebars -->
                 <div class="lg:col-span-4 space-y-8">
-                    <section class="glass-panel rounded-[2.5rem] p-8 border border-white">
-                        <h3 class="flex items-center gap-4 text-2xl font-serif font-bold text-slate-900 mb-8">
-                            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-accent-hebrew to-amber-600 flex items-center justify-center shadow-md">
-                                <i class="ph-fill ph-student text-white text-xl"></i>
-                            </div>
-                            Scholar's Desk
-                        </h3>
-                        <div class="space-y-4" id="scholars-desk-container"></div>
-                    </section>
                     <section class="glass-panel rounded-[2.5rem] p-8 relative overflow-hidden border border-white">
-                        <h3 class="flex items-center gap-4 text-2xl font-serif font-bold text-slate-900 mb-4">
-                            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-accent-ai to-purple-600 flex items-center justify-center shadow-md">
-                                <i class="ph-fill ph-magic-wand text-white text-xl"></i>
-                            </div>
-                            AI Studio
-                        </h3>
+                        <h3 class="flex items-center gap-4 text-2xl font-serif font-bold text-slate-900 mb-4"><i class="ph-fill ph-magic-wand text-accent-ai"></i> AI Studio</h3>
                         <div class="flex flex-col gap-4 relative z-10">
                             <button onclick="handleGenerate('sermon')" class="w-full py-4 px-6 bg-white border border-slate-100 rounded-2xl font-bold flex items-center justify-between group hover:bg-slate-50 transition-colors">
                                 <span class="flex items-center gap-3"><i class="ph-fill ph-microphone-stage text-accent-ai"></i> Sermon Outline</span>
-                                <i class="ph-bold ph-arrow-right opacity-0 group-hover:opacity-100 transition-opacity text-accent-ai"></i>
+                                <i class="ph-bold ph-arrow-right opacity-0 group-hover:opacity-100 transition-opacity"></i>
                             </button>
                             <button onclick="handleGenerate('devo')" class="w-full py-4 px-6 bg-white border border-slate-100 rounded-2xl font-bold flex items-center justify-between group hover:bg-slate-50 transition-colors">
                                 <span class="flex items-center gap-3"><i class="ph-fill ph-book-open text-accent-hebrew"></i> Devotional</span>
-                                <i class="ph-bold ph-arrow-right opacity-0 group-hover:opacity-100 transition-opacity text-accent-hebrew"></i>
+                                <i class="ph-bold ph-arrow-right opacity-0 group-hover:opacity-100 transition-opacity"></i>
                             </button>
                         </div>
                     </section>
+                    <!-- Scholar Desk -->
                     <section class="glass-panel rounded-[2.5rem] p-8 border border-white">
-                        <h3 class="flex items-center gap-4 text-2xl font-serif font-bold text-slate-900 mb-8">
-                            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-accent-danger to-red-600 flex items-center justify-center shadow-md">
-                                <i class="ph-fill ph-lightbulb text-white text-xl"></i>
-                            </div>
-                            Application
-                        </h3>
-                        <div class="space-y-8" id="homiletical-container"></div>
+                        <h3 class="flex items-center gap-4 text-2xl font-serif font-bold text-slate-900 mb-8"><i class="ph-fill ph-student text-accent-hebrew"></i> Scholar's Desk</h3>
+                        <div id="scholars-desk-container" class="space-y-4"></div>
                     </section>
                 </div>
             </div>
         </main>
-        <footer class="py-12 text-center text-sm font-semibold text-slate-400 mt-auto">Univera © 2026. One God. One Voice. One Word.</footer>
+        <footer class="py-12 text-center text-sm font-semibold text-slate-400">Univera © 2026. One God. One Voice. One Word.</footer>
     </div>
 
-    <!-- MOBILE NAVIGATION -->
+    <!-- Mobile Nav -->
     <div class="md:hidden fixed bottom-0 left-0 w-full glass-panel border-t border-white/50 z-[90] pb-safe shadow-float">
         <div class="flex justify-around items-center px-2 py-1">
-            <button onclick="resetToHome()" class="flex flex-col items-center justify-center p-2 w-14 h-14 text-slate-400 group focus:text-primary"><i class="ph-fill ph-house text-2xl mb-1"></i><span class="text-[10px] font-bold">Home</span></button>
-            <button onclick="openMobileSearch()" class="flex flex-col items-center justify-center p-2 w-14 h-14 text-slate-400 group focus:text-primary"><i class="ph-bold ph-magnifying-glass text-2xl mb-1"></i><span class="text-[10px] font-bold">Search</span></button>
-            <button onclick="shareContent()" class="flex flex-col items-center justify-center p-2 w-14 h-14 text-slate-400 group focus:text-primary"><i class="ph-bold ph-share-network text-2xl mb-1"></i><span class="text-[10px] font-bold">Share</span></button>
-            <button onclick="openSidebar('bookmarks')" class="flex flex-col items-center justify-center p-2 w-14 h-14 text-slate-400 group focus:text-primary"><i class="ph-fill ph-bookmarks text-2xl mb-1"></i><span class="text-[10px] font-bold">Saved</span></button>
+            <button onclick="resetToHome()" class="flex flex-col items-center justify-center p-2 text-slate-400 focus:text-primary"><i class="ph-fill ph-house text-2xl mb-1"></i><span class="text-[10px] font-bold">Home</span></button>
+            <button onclick="openMobileSearch()" class="flex flex-col items-center justify-center p-2 text-slate-400 focus:text-primary"><i class="ph-bold ph-magnifying-glass text-2xl mb-1"></i><span class="text-[10px] font-bold">Search</span></button>
+            <button onclick="openSidebar('bookmarks')" class="flex flex-col items-center justify-center p-2 text-slate-400 focus:text-primary"><i class="ph-fill ph-bookmarks text-2xl mb-1"></i><span class="text-[10px] font-bold">Saved</span></button>
         </div>
     </div>
 
     <script>
-        // Auto-detect environment to bypass Canvas referer blocks while using your real key on GitHub
-        const isPreviewEnv = window.location.hostname.includes('usercontent.goog');
-        const apiKey = isPreviewEnv ? "" : "AIzaSyB9JjY4HLZ6bJ7g15X8LdJHjAmEb0hoXuE";
+        // API Configuration - Detects environment
+        const isPreviewEnv = window.location.hostname.includes('usercontent.goog') || window.location.hostname.includes('localhost');
+        const apiKey = isPreviewEnv ? "" : "AIzaSyBbTgpqvn7TRW2uCL82tplC9AfvEDT_KvY";
 
         function triggerHaptic(type = 'light') {
             if (!window.navigator.vibrate) return;
             if (type === 'light') navigator.vibrate(10);
-            else if (type === 'medium') navigator.vibrate(25);
             else if (type === 'success') navigator.vibrate([10, 30, 10]);
-        }
-
-        async function shareContent() {
-            const word = document.getElementById('english-word').innerText;
-            const def = document.getElementById('synthesized-def').innerText;
-            if (word === 'Word') return showError("Search for a word first.");
-            const shareData = { title: `Univera Study: ${word}`, text: `Check out ${word} on Univera: ${def}`, url: window.location.href };
-            if (navigator.share) {
-                try { await navigator.share(shareData); triggerHaptic('success'); } catch (e) {}
-            } else { exportToNotes(); }
-        }
-
-        function initTiltCards() {
-            if (!window.matchMedia("(pointer: fine)").matches) return;
-            document.querySelectorAll('.tilt-card').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 4;
-                    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -4;
-                    card.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg) scale3d(1.01, 1.01, 1.01)`;
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                    card.style.transition = 'transform 0.5s';
-                });
-            });
-        }
-
-        const theologicalConcepts = ["Grace", "Agape", "Shalom", "Propitiation", "Justification", "Chesed", "Logos", "Righteousness", "Covenant", "Messiah", "Kenosis", "Ruach", "Soteriology"];
-        function initTicker() {
-            const container = document.getElementById('word-ticker');
-            let array = [...theologicalConcepts].sort(() => Math.random() - 0.5);
-            const set = array.map(w => `<span class="mx-6 text-sm font-bold text-slate-400 hover:text-primary cursor-pointer uppercase tracking-widest" onclick="runSearch('${w}')">${w}</span>`).join('<span class="w-1 h-1 rounded-full bg-slate-300 mx-2"></span>');
-            container.innerHTML = set + set;
         }
 
         async function fetchWithRetry(url, options, retries = 5) {
@@ -454,202 +279,142 @@
                     const response = await fetch(url, options);
                     if (!response.ok) {
                         const errData = await response.json().catch(() => ({}));
-                        throw new Error(errData.error?.message || "API Status: " + response.status);
+                        throw new Error(errData.error?.message || `Status: ${response.status}`);
                     }
                     return await response.json();
                 } catch (e) {
-                    if (i === retries - 1 || e.message.includes("API key not valid") || e.message.includes("not found")) throw e;
+                    // Stop if key is invalid or blocked (not a network/temp issue)
+                    if (e.message.includes("API key not valid") || e.message.includes("blocked") || e.message.includes("referer")) throw e;
+                    if (i === retries - 1) throw e;
                     await new Promise(r => setTimeout(r, delays[i]));
                 }
             }
         }
 
-        async function fetchWithModelFallback(payload) {
-            // Tries models in order: Preview Environment -> Modern Production -> Legacy Production
-            const models = ['gemini-2.5-flash-preview-09-2025', 'gemini-2.5-flash', 'gemini-1.5-flash'];
-            let lastError = null;
+        async function callGemini(payload) {
+            // Using the specific preview model recommended for this environment
+            const model = "gemini-2.5-flash-preview-09-2025";
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
             
-            for (let model of models) {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-                try {
-                    return await fetchWithRetry(url, { 
+            try {
+                return await fetchWithRetry(url, { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify(payload) 
+                });
+            } catch (e) {
+                // Fallback attempt for standard environment
+                if (e.message.includes("not found")) {
+                    const fallbackUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+                    return await fetchWithRetry(fallbackUrl, { 
                         method: 'POST', 
                         headers: { 'Content-Type': 'application/json' }, 
                         body: JSON.stringify(payload) 
                     });
-                } catch (e) {
-                    // If the current environment rejects the model name, gracefully fall back to the next one
-                    if (e.message && (e.message.includes("not found") || e.message.includes("not supported") || e.message.includes("referer"))) {
-                        console.warn(`Model ${model} unavailable in this environment, falling back...`);
-                        lastError = e;
-                        continue;
-                    }
-                    // Throw immediately if it's an actual issue like a bad API key
-                    throw e; 
                 }
+                throw e;
             }
-            throw lastError || new Error("All AI models are currently unavailable.");
-        }
-
-        let loadingInterval;
-        async function generateBiblicalData(word) {
-            const cacheKey = `univera_cache_${word.toLowerCase()}`;
-            const cached = sessionStorage.getItem(cacheKey);
-            if (cached) {
-                const parsed = JSON.parse(cached);
-                if (parsed.usage && parsed.translations) return parsed;
-                sessionStorage.removeItem(cacheKey);
-            }
-
-            const schema = {
-                type: "OBJECT",
-                properties: {
-                    word: { type: "STRING" }, pos: { type: "STRING" }, definition: { type: "STRING" },
-                    nt: { type: "OBJECT", properties: { greek: { type: "STRING" }, transliteration: { type: "STRING" }, strongs: { type: "STRING" }, occurrences: { type: "STRING" }, lexicon: { type: "STRING" } }, required: ["greek", "transliteration", "strongs", "occurrences", "lexicon"] },
-                    ot: { type: "OBJECT", properties: { hebrew: { type: "STRING" }, transliteration: { type: "STRING" }, strongs: { type: "STRING" }, occurrences: { type: "STRING" }, lexicon: { type: "STRING" } }, required: ["hebrew", "transliteration", "strongs", "occurrences", "lexicon"] },
-                    usage: { type: "ARRAY", items: { type: "OBJECT", properties: { ref: { type: "STRING" }, text: { type: "STRING" }, context: { type: "STRING" } }, required: ["ref", "text", "context"] } },
-                    translations: { type: "ARRAY", items: { type: "OBJECT", properties: { version: { type: "STRING" }, rendering: { type: "STRING" }, philosophy: { type: "STRING" } }, required: ["version", "rendering", "philosophy"] } },
-                    translationNotes: { type: "STRING" },
-                    relatedTerms: { type: "ARRAY", items: { type: "STRING" } },
-                    scholars: { type: "ARRAY", items: { type: "OBJECT", properties: { title: { type: "STRING" }, content: { type: "STRING" } }, required: ["title", "content"] } },
-                    application: { type: "OBJECT", properties: { takeaways: { type: "ARRAY", items: { type: "STRING" } }, cautions: { type: "ARRAY", items: { type: "STRING" } } }, required: ["takeaways", "cautions"] }
-                },
-                required: ["word", "pos", "definition", "nt", "ot", "usage", "translations", "translationNotes", "relatedTerms", "scholars", "application"]
-            };
-
-            const payload = {
-                contents: [{ parts: [{ text: `Provide biblical analysis for: "${word}". Include 5 OT and 5 NT usages.` }] }],
-                systemInstruction: { parts: [{ text: "You are a senior biblical scholar at Univera. Output strictly in the provided JSON schema. Ensure both OT and NT are fully populated." }] },
-                generationConfig: { responseMimeType: "application/json", responseSchema: schema }
-            };
-
-            const result = await fetchWithModelFallback(payload);
-            const data = JSON.parse(result.candidates[0].content.parts[0].text);
-            sessionStorage.setItem(cacheKey, JSON.stringify(data));
-            return data;
         }
 
         async function runSearch(query = null) {
             if (event) event.preventDefault();
-            const term = query || document.getElementById('main-search-input').value || document.getElementById('nav-search-input').value || document.getElementById('mobile-search-input').value;
+            const term = query || document.getElementById('main-search-input').value || document.getElementById('nav-search-input').value;
             if (!term) return;
-            closeMobileSearch();
-            triggerHaptic('light');
+            
             document.getElementById('loading-overlay').classList.remove('hidden');
-            const dynamicText = document.getElementById('loading-text-dynamic');
-            const phrases = ["Querying Univera Database...", "Consulting Lexicons...", "Cross-referencing texts...", "Synthesizing theology..."];
-            let idx = 0;
-            loadingInterval = setInterval(() => { idx = (idx + 1) % phrases.length; dynamicText.innerText = phrases[idx]; }, 2000);
+            triggerHaptic('light');
 
             try {
-                const data = await generateBiblicalData(term);
+                const schema = {
+                    type: "OBJECT",
+                    properties: {
+                        word: { type: "STRING" }, 
+                        pos: { type: "STRING" }, 
+                        definition: { type: "STRING" },
+                        nt: { type: "OBJECT", properties: { greek: { type: "STRING" }, transliteration: { type: "STRING" }, strongs: { type: "STRING" }, occurrences: { type: "STRING" }, lexicon: { type: "STRING" } } },
+                        ot: { type: "OBJECT", properties: { hebrew: { type: "STRING" }, transliteration: { type: "STRING" }, strongs: { type: "STRING" }, occurrences: { type: "STRING" }, lexicon: { type: "STRING" } } },
+                        usage: { type: "ARRAY", items: { type: "OBJECT", properties: { ref: { type: "STRING" }, text: { type: "STRING" }, context: { type: "STRING" } } } },
+                        scholars: { type: "ARRAY", items: { type: "OBJECT", properties: { title: { type: "STRING" }, content: { type: "STRING" } } } },
+                        relatedTerms: { type: "ARRAY", items: { type: "STRING" } }
+                    },
+                    required: ["word", "pos", "definition", "nt", "ot", "usage", "relatedTerms", "scholars"]
+                };
+
+                const payload = {
+                    contents: [{ parts: [{ text: `Provide deep scholarly analysis for: "${term}". Populating all fields.` }] }],
+                    systemInstruction: { parts: [{ text: "You are a senior biblical researcher. Output strictly in the provided JSON schema." }] },
+                    generationConfig: { responseMimeType: "application/json", responseSchema: schema }
+                };
+
+                const res = await callGemini(payload);
+                const data = JSON.parse(res.candidates[0].content.parts[0].text);
                 populateDashboard(data, term);
+                
                 document.getElementById('landing-state').classList.add('hidden');
                 document.getElementById('results-state').classList.remove('hidden');
                 document.getElementById('results-state').classList.add('flex');
-                document.getElementById('nav-search-input').value = term;
-                document.getElementById('main-search-input').value = term;
                 saveToHistory(term);
                 triggerHaptic('success');
-            } catch (e) { 
-                console.error("API Error Details:", e);
-                showError("API Error: " + (e.message || "Connection failed. Check console.")); 
+            } catch (e) {
+                console.error("Search Error:", e);
+                showError("API Connection Error", "Ensure your Google Cloud settings permit requests from this domain.");
+            } finally {
+                document.getElementById('loading-overlay').classList.add('hidden');
             }
-            finally { clearInterval(loadingInterval); document.getElementById('loading-overlay').classList.add('hidden'); }
         }
 
         function populateDashboard(data, term) {
-            document.getElementById('english-word').innerText = term;
+            document.getElementById('english-word').innerText = data.word || term;
             document.getElementById('pos-label').innerText = data.pos;
             document.getElementById('synthesized-def').innerHTML = data.definition;
-            const cloud = document.getElementById('word-cloud-container');
-            cloud.innerHTML = data.relatedTerms.map(t => `<button onclick="runSearch('${t}')" class="px-5 py-2 bg-white/80 backdrop-blur-md border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:text-primary hover:border-primary transition-all shadow-sm">${t}</button>`).join('');
-            cloud.classList.remove('hidden');
-
-            const ntLex = document.getElementById('lexical-data-nt');
-            ntLex.innerHTML = `
-                <div class="md:col-span-3">
-                    <p class="text-xs text-slate-400 font-bold mb-3 uppercase tracking-widest">Greek</p>
-                    <div class="flex items-center gap-4">
-                        <p class="text-greek text-primary text-6xl drop-shadow-sm" id="greek-text">${data.nt.greek}</p>
-                        <button onclick="playTTS('greek-translit', this)" class="h-10 w-10 bg-blue-50 border border-blue-100 rounded-full text-primary hover:bg-primary hover:text-white transition-all"><i class="ph-fill ph-speaker-high"></i></button>
-                    </div>
-                    <p id="greek-translit" class="text-slate-500 italic text-xl font-serif">${data.nt.transliteration}</p>
-                </div>
-                <div class="md:col-span-3 border-l border-slate-200 pl-10">
-                    <p class="text-xs text-slate-400 font-bold mb-2 uppercase tracking-widest">Strong's</p>
-                    <span class="font-bold text-xl text-slate-900">${data.nt.strongs}</span>
-                    <p class="text-xs text-slate-400 font-bold mt-4 uppercase tracking-widest">Frequency</p>
-                    <p class="font-bold text-slate-900">${data.nt.occurrences}</p>
-                </div>
-                <div class="md:col-span-6 bg-white/60 p-8 rounded-3xl border border-white shadow-sm">
-                    <p class="text-xs text-slate-400 font-bold mb-4 uppercase tracking-widest">BDAG Lexicon Summary</p>
-                    <p class="text-lg font-serif text-slate-700 leading-relaxed">${data.nt.lexicon}</p>
-                </div>
-            `;
-
-            const otLex = document.getElementById('lexical-data-ot');
-            otLex.innerHTML = `
-                <div class="md:col-span-3">
-                    <p class="text-xs text-slate-400 font-bold mb-3 uppercase tracking-widest">Hebrew</p>
-                    <div class="flex items-center gap-4">
-                        <p class="text-hebrew text-accent-hebrew text-7xl drop-shadow-sm" id="hebrew-text">${data.ot.hebrew}</p>
-                        <button onclick="playTTS('hebrew-translit', this)" class="h-10 w-10 bg-amber-50 border border-amber-100 rounded-full text-accent-hebrew hover:bg-accent-hebrew hover:text-white transition-all"><i class="ph-fill ph-speaker-high"></i></button>
-                    </div>
-                    <p id="hebrew-translit" class="text-slate-500 italic text-xl font-serif">${data.ot.transliteration}</p>
-                </div>
-                <div class="md:col-span-3 border-l border-slate-200 pl-10">
-                    <p class="text-xs text-slate-400 font-bold mb-2 uppercase tracking-widest">Strong's</p>
-                    <span class="font-bold text-xl text-slate-900">${data.ot.strongs}</span>
-                </div>
-                <div class="md:col-span-6 bg-white/60 p-8 rounded-3xl border border-white shadow-sm">
-                    <p class="text-xs text-slate-400 font-bold mb-4 uppercase tracking-widest">HALOT Lexicon Summary</p>
-                    <p class="text-lg font-serif text-slate-700 leading-relaxed">${data.ot.lexicon}</p>
-                </div>
-            `;
-
-            const ntUsages = data.usage.filter(u => /Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation/i.test(u.ref));
-            const otUsages = data.usage.filter(u => !ntUsages.includes(u));
-            const renderUsage = (u, c) => `<div class="bg-white/70 backdrop-blur-md rounded-3xl p-8 border border-white shadow-sm group hover:-translate-y-1 transition-all">
-                <h4 class="text-sm font-bold ${c} mb-3 flex items-center gap-2"><i class="ph-bold ph-bookmark-simple"></i> ${u.ref}</h4>
-                <p class="font-serif text-slate-800 text-xl leading-relaxed mb-5 italic">"${u.text}"</p>
-                <div class="bg-slate-50/50 rounded-2xl p-5 border border-slate-100 text-sm font-medium text-slate-600"><span class="font-bold text-slate-900">Context:</span> ${u.context}</div>
-            </div>`;
-            document.getElementById('usage-container-nt').innerHTML = ntUsages.map(u => renderUsage(u, 'text-primary')).join('');
-            document.getElementById('usage-container-ot').innerHTML = otUsages.map(u => renderUsage(u, 'text-accent-hebrew')).join('');
             
-            document.getElementById('translation-matrix-body').innerHTML = data.translations.map(t => `
-                <tr class="group">
-                    <td class="p-5 font-bold text-slate-900 bg-white/40 border border-white rounded-l-2xl">${t.version}</td>
-                    <td class="p-5 font-serif text-slate-800 text-lg bg-white/40 border-y border-white">${t.rendering}</td>
-                    <td class="p-5 text-sm font-medium text-slate-500 bg-white/40 border border-white rounded-r-2xl">${t.philosophy}</td>
-                </tr>
-            `).join('');
-            document.getElementById('translation-notes').innerHTML = data.translationNotes;
-            document.getElementById('translation-notes-container').classList.remove('hidden');
-
-            document.getElementById('scholars-desk-container').innerHTML = data.scholars.map((s, i) => `
-                <div class="bg-white/70 backdrop-blur-sm rounded-2xl border border-white overflow-hidden shadow-sm">
-                    <button onclick="toggleAccordion('acc-${i}')" class="w-full flex justify-between items-center p-6 text-left font-bold text-slate-900 hover:bg-slate-50/50 transition-colors">
-                        <span>${s.title}</span><i id="icon-acc-${i}" class="ph-bold ph-caret-down text-slate-400 transition-transform"></i>
-                    </button>
-                    <div id="acc-${i}" class="hidden p-6 pt-0 text-slate-600 font-medium leading-relaxed">${s.content}</div>
+            const renderLex = (l, lang, theme) => `
+                <div class="md:col-span-4">
+                    <p class="text-xs text-slate-400 font-bold mb-3 uppercase tracking-widest">${lang}</p>
+                    <p class="text-6xl ${theme} drop-shadow-sm mb-2">${l.greek || l.hebrew || "---"}</p>
+                    <p class="text-slate-500 italic text-xl font-serif">${l.transliteration || "---"}</p>
+                    <div class="mt-4 flex gap-4 text-sm font-bold text-slate-700">
+                        <span>Strongs: ${l.strongs || "---"}</span>
+                        <span>Freq: ${l.occurrences || "---"}</span>
+                    </div>
                 </div>
-            `).join('');
-
-            document.getElementById('homiletical-container').innerHTML = `
-                <div class="space-y-4">
-                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Constructive Takeaways</h4>
-                    <ul class="space-y-2">${data.application.takeaways.map(t => `<li class="p-4 bg-white/40 border border-white rounded-2xl text-sm font-medium text-slate-700">${t}</li>`).join('')}</ul>
-                </div>
-                <div class="pt-4">
-                    <h4 class="text-xs font-bold text-accent-danger uppercase tracking-widest">Exegetical Cautions</h4>
-                    <ul class="space-y-2">${data.application.cautions.map(c => `<li class="p-4 bg-accent-danger/10 border border-accent-danger/20 rounded-2xl text-sm font-medium text-slate-700">${c}</li>`).join('')}</ul>
+                <div class="md:col-span-8 bg-white/60 p-6 rounded-3xl border border-white">
+                    <p class="text-xs text-slate-400 font-bold mb-2 uppercase tracking-widest">Lexicon Summary</p>
+                    <p class="text-lg font-serif text-slate-700 leading-relaxed">${l.lexicon || "No data available."}</p>
                 </div>
             `;
-            updateBookmarkIcon(term);
+            
+            document.getElementById('lexical-data-nt').innerHTML = renderLex(data.nt, 'Greek', 'text-primary');
+            document.getElementById('lexical-data-ot').innerHTML = renderLex(data.ot, 'Hebrew', 'text-accent-hebrew');
+            
+            const ntRef = /Matt|Mark|Luke|John|Acts|Rom|Cor|Gal|Eph|Phil|Col|Thes|Tim|Tit|Phm|Heb|Jam|Pet|Jud|Rev/i;
+            const ntUsages = data.usage.filter(u => ntRef.test(u.ref));
+            const otUsages = data.usage.filter(u => !ntRef.test(u.ref));
+            
+            const renderUsage = (u, color) => `
+                <div class="bg-white/70 rounded-3xl p-6 border border-white shadow-sm hover:-translate-y-1 transition-all">
+                    <h4 class="text-sm font-bold ${color} mb-2">${u.ref}</h4>
+                    <p class="font-serif text-slate-800 text-lg leading-relaxed italic mb-4">"${u.text}"</p>
+                    <p class="text-sm font-medium text-slate-600"><span class="font-bold text-slate-900">Context:</span> ${u.context}</p>
+                </div>
+            `;
+            
+            document.getElementById('usage-container-nt').innerHTML = ntUsages.map(u => renderUsage(u, 'text-primary')).join('') || "<p class='text-slate-400'>No direct NT usages found.</p>";
+            document.getElementById('usage-container-ot').innerHTML = otUsages.map(u => renderUsage(u, 'text-accent-hebrew')).join('') || "<p class='text-slate-400'>No direct OT usages found.</p>";
+            
+            document.getElementById('scholars-desk-container').innerHTML = data.scholars.map(s => `
+                <div class="p-6 bg-white/70 rounded-2xl border border-white">
+                    <h4 class="font-bold text-slate-900 mb-2">${s.title}</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">${s.content}</p>
+                </div>
+            `).join('');
+
+            const cloud = document.getElementById('word-cloud-container');
+            cloud.innerHTML = data.relatedTerms.map(t => `<button onclick="runSearch('${t}')" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:border-primary transition-all shadow-sm">${t}</button>`).join('');
+            cloud.classList.remove('hidden');
+            
             toggleTestament('nt');
-            initTiltCards();
+            updateBookmarkIcon(term);
         }
 
         function toggleTestament(t) {
@@ -662,18 +427,41 @@
             document.getElementById('usage-container-ot').classList.toggle('hidden', isNT);
         }
 
-        function toggleAccordion(id) {
-            const el = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
-            el.classList.toggle('hidden');
-            icon.style.transform = el.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        async function handleGenerate(type) {
+            const word = document.getElementById('english-word').innerText;
+            const modal = document.getElementById('gen-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); document.getElementById('gen-modal-panel').classList.remove('scale-95'); }, 10);
+            
+            const content = document.getElementById('gen-modal-content');
+            content.innerHTML = `<div class="flex flex-col items-center justify-center py-20"><i class="ph-fill ph-magic-wand animate-bounce text-5xl text-accent-ai"></i><p class="mt-4 font-bold text-slate-800">Drafting study material...</p></div>`;
+            
+            try {
+                const prompt = `Write a theological ${type === 'sermon' ? 'sermon outline' : 'daily devotional'} for: ${word}. Use HTML tags like <h3>, <h4>, <ul>, <li>.`;
+                const res = await callGemini({ contents: [{ parts: [{ text: prompt }] }] });
+                content.innerHTML = res.candidates[0].content.parts[0].text;
+            } catch (e) {
+                content.innerHTML = "AI Generation failed. Check connection.";
+            }
+        }
+
+        function closeGenModal() {
+            document.getElementById('gen-modal').classList.add('opacity-0');
+            document.getElementById('gen-modal-panel').classList.add('scale-95');
+            setTimeout(() => document.getElementById('gen-modal').classList.add('hidden'), 500);
+        }
+
+        function resetToHome() {
+            document.getElementById('results-state').classList.add('hidden');
+            document.getElementById('landing-state').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function openSidebar(type) {
             const list = document.getElementById('sidebar-list');
-            document.getElementById('sidebar-title').innerText = type === 'bookmarks' ? 'Saved at Univera' : 'Search History';
+            document.getElementById('sidebar-title').innerText = type === 'bookmarks' ? 'Saved Studies' : 'History';
             const items = JSON.parse(localStorage.getItem(type === 'bookmarks' ? 'univera_bookmarks' : 'univera_history') || '[]');
-            list.innerHTML = items.length ? items.map(i => `<button onclick="closeSidebar(); runSearch('${i}')" class="w-full p-4 bg-white/70 border border-white rounded-2xl font-bold text-left capitalize group flex justify-between items-center transition-all hover:border-primary">${i}<i class="ph-bold ph-arrow-right opacity-0 group-hover:opacity-100 text-primary transition-opacity"></i></button>`).join('') : '<p class="text-center mt-10 text-slate-400 font-medium">Your library is currently empty.</p>';
+            list.innerHTML = items.length ? items.map(i => `<button onclick="closeSidebar(); runSearch('${i}')" class="w-full p-4 bg-white/70 border border-white rounded-2xl font-bold text-left group flex justify-between items-center transition-all hover:border-primary">${i}<i class="ph-bold ph-arrow-right opacity-0 group-hover:opacity-100 text-primary"></i></button>`).join('') : '<p class="text-center mt-10 text-slate-400">Empty</p>';
             document.getElementById('sidebar-panel').classList.remove('hidden');
             setTimeout(() => { document.getElementById('sidebar-backdrop').classList.remove('opacity-0'); document.getElementById('sidebar-content').classList.remove('translate-x-full'); }, 10);
         }
@@ -684,22 +472,6 @@
             setTimeout(() => document.getElementById('sidebar-panel').classList.add('hidden'), 300);
         }
 
-        function resetToHome() {
-            document.getElementById('results-state').classList.add('hidden');
-            document.getElementById('landing-state').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function openMobileSearch() {
-            const modal = document.getElementById('mobile-search-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0', 'translate-y-8'); document.getElementById('mobile-search-input').focus(); }, 10);
-        }
-        function closeMobileSearch() {
-            document.getElementById('mobile-search-modal').classList.add('opacity-0', 'translate-y-8');
-            setTimeout(() => document.getElementById('mobile-search-modal').classList.add('hidden'), 300);
-        }
-
         function saveToHistory(w) {
             let h = JSON.parse(localStorage.getItem('univera_history') || '[]');
             h = [w, ...h.filter(x => x !== w)].slice(0, 20);
@@ -708,122 +480,57 @@
 
         function toggleBookmark() {
             const w = document.getElementById('english-word').innerText;
+            if (w === "Word") return;
             let b = JSON.parse(localStorage.getItem('univera_bookmarks') || '[]');
             const exists = b.includes(w);
             if (exists) b = b.filter(x => x !== w); else b.push(w);
             localStorage.setItem('univera_bookmarks', JSON.stringify(b));
             updateBookmarkIcon(w);
-            triggerHaptic(exists ? 'light' : 'medium');
+            triggerHaptic(exists ? 'light' : 'success');
         }
 
         function updateBookmarkIcon(w) {
             const b = JSON.parse(localStorage.getItem('univera_bookmarks') || '[]');
-            const icon = document.getElementById('bookmark-icon');
-            const exists = b.includes(w);
-            icon.className = exists ? 'ph-fill ph-bookmark-simple text-primary' : 'ph-bold ph-bookmark-simple';
+            document.getElementById('bookmark-icon').className = b.includes(w) ? 'ph-fill ph-bookmark-simple text-primary' : 'ph-bold ph-bookmark-simple';
         }
 
-        async function handleGenerate(type) {
-            const word = document.getElementById('english-word').innerText;
-            const modal = document.getElementById('gen-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); document.getElementById('gen-modal-panel').classList.remove('scale-95'); }, 10);
-            const content = document.getElementById('gen-modal-content');
-            content.innerHTML = `<div class="flex flex-col items-center justify-center py-20"><i class="ph-fill ph-magic-wand animate-bounce text-5xl text-accent-ai"></i><p class="mt-4 font-bold text-slate-800">Univera is drafting your content...</p></div>`;
-            try {
-                const prompt = type === 'sermon' ? `Draft a professional sermon outline for: ${word}` : `Write an inspiring daily devotional for: ${word}`;
-                let html = await callGenerativeText(prompt);
-                content.innerHTML = html.replace(/```html|```/g, '');
-            } catch (e) { content.innerHTML = "Univera AI encountered a generation error."; }
-        }
-
-        function closeGenModal() {
-            document.getElementById('gen-modal').classList.add('opacity-0');
-            document.getElementById('gen-modal-panel').classList.add('scale-95');
-            setTimeout(() => document.getElementById('gen-modal').classList.add('hidden'), 500);
-        }
-
-        async function playTTS(id, btn) {
-            let text = document.getElementById(id).innerText.replace(/[^a-zA-Z\s]/g, '').trim();
-            const icon = btn.innerHTML;
-            btn.innerHTML = '<i class="ph-bold ph-spinner-gap animate-spin"></i>';
-            btn.disabled = true;
-            try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-                const payload = { contents: [{ parts: [{ text: "Clearly pronounce the biblical word: " + text }] }], generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Aoede" } } } }, model: "gemini-2.5-flash-preview-tts" };
-                const res = await fetchWithRetry(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                const wav = pcmToWav(res.candidates[0].content.parts[0].inlineData.data);
-                const audio = new Audio(URL.createObjectURL(wav));
-                await audio.play();
-            } catch (e) { showError("Univera Voice service error."); }
-            finally { btn.innerHTML = icon; btn.disabled = false; }
-        }
-
-        function pcmToWav(b64) {
-            const bin = atob(b64), bytes = new Uint8Array(bin.length);
-            for(let i=0; i<bin.length; i++) bytes[i] = bin.charCodeAt(i);
-            const buf = new ArrayBuffer(44 + bytes.length), view = new DataView(buf);
-            const s = (o, str) => { for(let i=0; i<str.length; i++) view.setUint8(o+i, str.charCodeAt(i)); };
-            s(0, 'RIFF'); view.setUint32(4, 36 + bytes.length, true); s(8, 'WAVE'); s(12, 'fmt ');
-            view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
-            view.setUint32(24, 24000, true); view.setUint32(28, 48000, true); view.setUint16(32, 2, true);
-            view.setUint16(34, 16, true); s(36, 'data'); view.setUint32(40, bytes.length, true);
-            new Uint8Array(buf, 44).set(bytes); return new Blob([buf], {type: 'audio/wav'});
-        }
-
-        function exportToNotes() {
-            const w = document.getElementById('english-word').innerText;
-            const blob = new Blob([`# Univera Research: ${w}\n\nOne God. One Voice. One Word.\n\n${document.getElementById('synthesized-def').innerText}`], {type: 'text/markdown'});
-            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Univera_${w}_Study.md`; a.click();
-        }
-
-        async function callGenerativeText(promptText) {
-            const payload = {
-                contents: [{ parts: [{ text: promptText }] }],
-                systemInstruction: { parts: [{ text: "You are Univera AI, an expert theological scholar. Format your output in rich HTML (using <h3>, <h4>, <p>, <ul>, <li>, <strong>, <em>). Do not wrap the response in markdown codeblocks. Return only the raw HTML." }] }
-            };
-            const res = await fetchWithModelFallback(payload);
-            return res.candidates[0].content.parts[0].text;
+        function showError(msg, tip) {
+            const toast = document.getElementById('error-toast');
+            document.getElementById('error-toast-msg').innerText = msg;
+            document.getElementById('error-toast-tip').innerText = tip;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { 
+                toast.classList.add('translate-y-10', 'opacity-0'); 
+                setTimeout(() => toast.classList.add('hidden'), 300); 
+            }, 6000);
         }
 
         function copyGenContent() {
-            // Get text content, keeping some formatting via innerText
             const textToCopy = document.getElementById('gen-modal-content').innerText;
-            
-            // Fallback copy method compatible with mobile/iframes
             const temp = document.createElement('textarea');
             temp.value = textToCopy;
             document.body.appendChild(temp);
             temp.select();
             document.execCommand('copy');
             document.body.removeChild(temp);
-            
             triggerHaptic('success');
-            
-            // Visual feedback
             const btn = event.currentTarget;
             const original = btn.innerHTML;
             btn.innerHTML = '<i class="ph-fill ph-check-circle text-lg text-emerald-500"></i> Copied!';
-            btn.classList.add('border-emerald-200', 'bg-emerald-50');
-            
-            setTimeout(() => { 
-                btn.innerHTML = original; 
-                btn.classList.remove('border-emerald-200', 'bg-emerald-50');
-            }, 2500);
+            setTimeout(() => btn.innerHTML = original, 2500);
         }
 
-        function showError(msg) {
-            const toast = document.getElementById('error-toast');
-            document.getElementById('error-toast-msg').innerText = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
-            setTimeout(() => { toast.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => toast.classList.add('hidden'), 300); }, 5000);
+        const concepts = ["Grace", "Agape", "Shalom", "Logos", "Covenant", "Messiah", "Ruach", "Faith"];
+        function initTicker() {
+            const container = document.getElementById('word-ticker');
+            const set = concepts.map(w => `<span class="mx-6 text-sm font-bold text-slate-400 hover:text-primary cursor-pointer uppercase tracking-widest" onclick="runSearch('${w}')">${w}</span>`).join(' • ');
+            container.innerHTML = set + set;
         }
 
         document.getElementById('main-search-form').addEventListener('submit', () => runSearch());
         document.getElementById('nav-search-form').addEventListener('submit', () => runSearch());
-        document.getElementById('mobile-search-form').addEventListener('submit', () => runSearch());
-        document.addEventListener('DOMContentLoaded', () => { initTicker(); initTiltCards(); });
+        document.addEventListener('DOMContentLoaded', initTicker);
     </script>
 </body>
 </html>
